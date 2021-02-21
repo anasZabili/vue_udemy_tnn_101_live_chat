@@ -14,13 +14,16 @@
 
 <script>
 import { ref } from "vue";
+import useSignup from "../composable/useSignup";
 export default {
   setup() {
+    const { error, signup } = useSignup();
     const displayName = ref("");
     const email = ref("");
     const password = ref("");
-    const handleSubmit = () => {
-      console.log(displayName.value, email.value, password.value);
+    const handleSubmit = async () => {
+      await signup(email.value, password.value, displayName.value);
+      console.log("user signup");
     };
 
     return { displayName, email, password, handleSubmit };
