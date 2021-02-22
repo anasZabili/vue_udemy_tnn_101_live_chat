@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <NavBar />
+    <NewChatForm />
   </div>
 </template>
 
@@ -10,10 +11,12 @@ import NavBar from "../components/NavBar";
 import { firebaseAuth } from "../firebase/config";
 import getUser from "../composable/getUser";
 import { useRouter } from "vue-router";
+import NewChatForm from "../components/NewChatForm";
 
 export default {
   components: {
     NavBar,
+    NewChatForm,
   },
   setup() {
     const router = useRouter();
