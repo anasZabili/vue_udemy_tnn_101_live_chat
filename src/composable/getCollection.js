@@ -1,15 +1,15 @@
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import { projectFirestore } from "../firebase/config";
 
 const getCollection = (collection) => {
   const documents = ref(null);
   const error = ref(null);
 
-  let collectionRef = projectFiresotre
+  let collectionRef = projectFirestore
     .collection(collection)
     .orderBy("createdAt");
 
-  collectionRef.onSnapshot(
+  const unsub = collectionRef.onSnapshot(
     (snap) => {
       let results = [];
       snap.docs.forEach((doc) => {
@@ -29,6 +29,11 @@ const getCollection = (collection) => {
       error.value = "could not fetch data";
     }
   );
+  // onInvalidate est declanché quand le composant ce demonte
+  watchEffect((onInvalidate) => {
+    // on se desabonne quand la composant ce demonte
+    onInvalidate(() => unsub());
+  });
   return { documents, error };
 };
 
