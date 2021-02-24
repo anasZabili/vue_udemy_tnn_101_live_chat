@@ -38,3 +38,10 @@ Mettre a jour et re deployer:
 
 1. npm run build
 2. firebase deploy
+
+Comment cacher la clef de l'api:
+aller sur ma console google http://console.developers.google.com/
+-selectionner mon projet
+-aller sur credential(ou identifiant)
+-selectionner cles api
+-ajouter notre domaine de cette manier les requetess seront seulement autorisé a partir de notre domaine

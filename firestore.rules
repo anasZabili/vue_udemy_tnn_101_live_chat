@@ -1,0 +1,12 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // {messagesId} signifie que l'on aura acces a tout les 
+    // documents de messages mais que le met la valeur de l'id du 
+    // document dans la variable messageId
+    // qui peut etre utilisé dans nos regles
+    match /messages/{messageId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
